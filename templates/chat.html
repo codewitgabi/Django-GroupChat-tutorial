@@ -26,7 +26,7 @@
             <p>
                 {{ message }}
             </p>
-            <small class="date-sent">{{ message.time_created }}</small>
+            <small class="date-sent">{{ message.time_created|date:"M j, y g:i a" }}</small>
         </div>
         {% endif %}
         {% empty %}
@@ -37,7 +37,7 @@
     </div>
     <form action="" id="chat-form" method="post">
     {% csrf_token %}
-        <input type="text" name="message" placeholder="Type Message...">
+        <textarea name="message" placeholder="Type Message..."></textarea>
         <button>Send</button>
     </form>
     </div>

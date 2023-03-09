@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User , auth
 from django.contrib import messages
 from .models import Category, Group, Message
-from django.db.models import Q
+from django.db.models import Q, Count
 
 
 def redirect_auth_user(func):
@@ -19,13 +19,15 @@ def index(request):
 	search = request.GET.get("search", "") # get search data
 	query_param = request.GET.get("cat", "") # get category
 	
-	categories = Category.objects.all()
+	categories = Category.objects.all().annotate(
+		num_groups=Count("group")
+	).order_by("num_groups")
 	
 	groups = Group.objects.filter(
 		Q(name__icontains=search) |
 		Q(creator__username__icontains=search),
 		category__name__icontains=query_param,
-	)
+	).order_by("?")
 	
 	context = {
 		"categories": categories,

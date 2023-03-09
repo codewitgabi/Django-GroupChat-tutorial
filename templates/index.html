@@ -9,7 +9,7 @@
             <h2 class="mb-1">Group Filter</h2>
             <hr class="mb-1">
             <a href="{% url 'index' %}" class="btn-link-b">All</a>
-            {% for category in categories %}
+            {% for category in categories reversed %}
                 <a href="{% url 'index' %}?cat={{ category }}" class="btn-link-b">{{ category }}</a>
             {% endfor %}
         </div>
