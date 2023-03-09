@@ -5,12 +5,12 @@
 
     <div class="row">
     
-        <div class="col">
+        <div class="col flex-0">
             <h2 class="mb-1">Group Filter</h2>
             <hr class="mb-1">
-            <a href="{% url 'index' %}" class="btn-link-b">All</a>
+            <a href="{% url 'index' %}" class="btn-link-b">All ({{ groups.count }})</a>
             {% for category in categories reversed %}
-                <a href="{% url 'index' %}?cat={{ category }}" class="btn-link-b">{{ category }}</a>
+                <a href="{% url 'index' %}?cat={{ category }}" class="btn-link-b">{{ category }} ({{ category.num_groups }})</a>
             {% endfor %}
         </div>
         
@@ -30,6 +30,8 @@
                 <a href="{% url 'view_chat' group.id %}" class="btn-link-bl">Go In</a>
                 {% endif %}
             </div>
+            {% empty %}
+            	<h3 align="center">Groups associated with given category does not exist!!!</h3>
             {% endfor %}
             
         </div>

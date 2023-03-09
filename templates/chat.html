@@ -37,7 +37,7 @@
     </div>
     <form action="" id="chat-form" method="post">
     {% csrf_token %}
-        <textarea name="message" placeholder="Type Message..."></textarea>
+        <textarea name="message" required placeholder="Type Message..."></textarea>
         <button>Send</button>
     </form>
     </div>
