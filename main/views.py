@@ -48,7 +48,7 @@ def view_group(request, group_id):
 	group = Group.objects.get(id= group_id)
 	
 	# check for valid group participants
-	if not request.user in group.participants.all():
+	if request.user not in group.participants.all():
 		return redirect("index")
 	
 	if request.method == "POST":
